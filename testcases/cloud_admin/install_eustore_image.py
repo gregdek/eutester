@@ -37,7 +37,7 @@ class TestEustoreImage(EutesterTestCase):
         print number_of_images
 
 if __name__ == "__main__":
-    # testcase = InstallEustoreImage()
+    testcase = InstallEustoreImage()
     ### Use the list of tests passed from config/command line to determine what subset of tests to run
     ### or use a predefined list
     # list = testcase.args.tests or ["ConfigureELB"]
