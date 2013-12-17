@@ -33,6 +33,8 @@ class TestEustoreImage(EutesterTestCase):
         # first_clc.sys("source " + self.tester.credpath  + "/eucarc && euca-install-load-balancer --install-default" , code=0)
         first_clc.sys("source /root/credentials/admin/eucarc")
         image_list = first_clc.sys("/usr/bin/eustore-describe-images")
+        for index, image_entry in enumerate(image_list):
+            image_list[index] = image_entry.split("\t")
         print image_list
 
 if __name__ == "__main__":
