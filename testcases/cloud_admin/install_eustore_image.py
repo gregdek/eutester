@@ -32,9 +32,8 @@ class TestEustoreImage(EutesterTestCase):
         # first_clc.install("eucalyptus-load-balancer-image")
         # first_clc.sys("source " + self.tester.credpath  + "/eucarc && euca-install-load-balancer --install-default" , code=0)
         first_clc.sys("source /root/credentials/admin/eucarc")
-        number_of_images = first_clc.sys("/usr/bin/eustore-describe-images | wc -l")
-        print "IMAGES"
-        print number_of_images
+        image_list = first_clc.sys("/usr/bin/eustore-describe-images")
+        print image_list
 
 if __name__ == "__main__":
     testcase = TestEustoreImage()
