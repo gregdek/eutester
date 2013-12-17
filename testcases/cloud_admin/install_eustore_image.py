@@ -28,14 +28,23 @@ class TestEustoreImage(EutesterTestCase):
             raise Exception("Unable to find a CLC")
         first_clc = clcs[0]
         assert isinstance(first_clc,Machine)
-        # first_clc.add_repo(url=self.args.img_repo, name="EucaLoadBalancer")
-        # first_clc.install("eucalyptus-load-balancer-image")
-        # first_clc.sys("source " + self.tester.credpath  + "/eucarc && euca-install-load-balancer --install-default" , code=0)
-        first_clc.sys("source /root/credentials/admin/eucarc")
+
+        # Source the credpath on the CLC from the argument provided
+        first_clc.sys("source " + self.tester.credpath + "/eucarc")
+
+        # Get the list of eustore images and put into image_list
         image_list = first_clc.sys("/usr/bin/eustore-describe-images")
         for index, image_entry in enumerate(image_list):
             image_list[index] = image_entry.split("\t")
+
         print image_list
+        # TODO:
+        # * select a random image and run eustore-install-image
+        # * get the EMI from the last line of the output
+        # * pass that EMI off for further testing (how?)
+        # * once that works, add arguments to the test for:
+        #   + testing all images
+        #   + testing certain kinds of images
 
 if __name__ == "__main__":
     testcase = TestEustoreImage()
