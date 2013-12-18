@@ -3,22 +3,22 @@
 from eucaops import Eucaops
 from eutester.eutestcase import EutesterTestCase
 from eutester.machine import Machine
+import random
 
-
-class TestEustoreImage(EutesterTestCase):
+class TestEustoreImages(EutesterTestCase):
     def __init__(self):
         self.setuptestcase()
         self.setup_parser()
-        self.parser.add_argument("--img-repo")
         self.get_args()
-        # Setup basic eutester object
+        # Setup basic eutester object. Password, config file, and credpath 
+        # are passed from MicroQA (or elsewhere.)
         self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath)
 
     def clean_method(self):
         pass
-        # This will be the method to delete images after testing
+        # TODO: we'll put image deletion in here.
 
-    def InstallEustoreImage(self):
+    def InstallEustoreImages(self):
         """
         This test randomly selects an image from the Eustore list of images,
         using the admin credentials on the CLC (passed in self.tester.credpath). 
@@ -37,7 +37,10 @@ class TestEustoreImage(EutesterTestCase):
         for index, image_entry in enumerate(image_list):
             image_list[index] = image_entry.split("\t")
 
-        print image_list
+        # OK, now we have a list. Get a random element from it.
+        image_id = random.randint(1,len(image_list))
+ 
+        print image_id
         # TODO:
         # * select a random image and run eustore-install-image
         # * get the EMI from the last line of the output
@@ -47,11 +50,11 @@ class TestEustoreImage(EutesterTestCase):
         #   + testing certain kinds of images
 
 if __name__ == "__main__":
-    testcase = TestEustoreImage()
+    testcase = TestEustoreImages()
     ### Use the list of tests passed from config/command line to determine what subset of tests to run
     ### or use a predefined list
     # list = testcase.args.tests or ["ConfigureELB"]
-    list = testcase.args.tests or ["InstallEustoreImage"]
+    list = testcase.args.tests or ["InstallEustoreImages"]
 
     ### Convert test suite methods to EutesterUnitTest objects
     unit_list = [ ]
