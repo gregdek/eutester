@@ -43,16 +43,13 @@ class TestEustoreImages(EutesterTestCase):
         # OK, now we have a list. Get a random element from it.
         image_id = image_list[random.randint(0,len(image_list)-1)][0]
  
-        print image_id
-        print self.bucketname
+        # Now install that image, into the test bucket.
+        image_install_output = first_clc.sys( "/usr/bin/eustore-install-image -b " + self.bucketname + " -i " + image_id )
 
-        # eustore-install-image -b test -i 1222062543
-
-        image_install_output = first_clc.sys("euca-install-image " + image_id)
+        print image_install_output
 
         # Be sure to set the image to be installable by all.
         # TODO:
-        # * select a random image and run eustore-install-image
         # * get the EMI from the last line of the output
         # * pass that EMI off for further testing (how?)
         # * once that works, add arguments to the test for:
