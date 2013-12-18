@@ -38,7 +38,7 @@ class TestEustoreImages(EutesterTestCase):
             image_list[index] = image_entry.split("\t")
 
         # OK, now we have a list. Get a random element from it.
-        image_id = random.randint(1,len(image_list))
+        image_id = image_list[random.randint(1,len(image_list))][1]
  
         print image_id
         # TODO:
