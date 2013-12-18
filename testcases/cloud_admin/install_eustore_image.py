@@ -4,15 +4,18 @@ from eucaops import Eucaops
 from eutester.eutestcase import EutesterTestCase
 from eutester.machine import Machine
 import random
+import time
 
 class TestEustoreImages(EutesterTestCase):
     def __init__(self):
         self.setuptestcase()
         self.setup_parser()
         self.get_args()
+        # Setup unique bucket name to epoch time.
+        self.bucketname='test'+str(int(time.time()))
         # Setup basic eutester object. Password, config file, and credpath 
         # are passed from MicroQA (or elsewhere.)
-        self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath)
+        self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath,bucketname=self.bucketname)
 
     def clean_method(self):
         pass
@@ -41,6 +44,13 @@ class TestEustoreImages(EutesterTestCase):
         image_id = image_list[random.randint(0,len(image_list)-1)][0]
  
         print image_id
+        print bucketname
+
+        # eustore-install-image -b test -i 1222062543
+
+        image_install_output = first_clc.sys("euca-install-image " + image_id)
+
+        # Be sure to set the image to be installable by all.
         # TODO:
         # * select a random image and run eustore-install-image
         # * get the EMI from the last line of the output
