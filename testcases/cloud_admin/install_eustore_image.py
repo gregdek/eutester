@@ -12,7 +12,7 @@ class TestEustoreImage(EutesterTestCase):
         self.parser.add_argument("--img-repo")
         self.get_args()
         # Setup basic eutester object
-        self.tester = Eucaops( config_file=self.args.config,password=self.args.password)
+        self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath)
 
     def clean_method(self):
         pass
