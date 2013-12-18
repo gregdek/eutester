@@ -44,7 +44,10 @@ class TestEustoreImages(EutesterTestCase):
         image_id = image_list[random.randint(0,len(image_list)-1)][0]
  
         # Now install that image, into the test bucket.
-        image_install_output = first_clc.sys( "/usr/bin/eustore-install-image -b " + self.bucketname + " -i " + image_id )
+        # Note the very long timeout! 15 minutes in this case.
+        image_install_output = first_clc.sys( "/usr/bin/eustore-install-image -b " + self.bucketname + " -i " + image_id, timeout=1800 )
+
+        # NOTE: NEED TO EXTEND SSH TIMEOUT HERE!
 
         print image_install_output
 
