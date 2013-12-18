@@ -15,7 +15,7 @@ class TestEustoreImages(EutesterTestCase):
         self.bucketname='test'+str(int(time.time()))
         # Setup basic eutester object. Password, config file, and credpath 
         # are passed from MicroQA (or elsewhere.)
-        self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath,bucketname=self.bucketname)
+        self.tester = Eucaops( config_file=self.args.config,password=self.args.password,credpath=self.args.credpath)
 
     def clean_method(self):
         pass
@@ -44,7 +44,7 @@ class TestEustoreImages(EutesterTestCase):
         image_id = image_list[random.randint(0,len(image_list)-1)][0]
  
         print image_id
-        print bucketname
+        print self.bucketname
 
         # eustore-install-image -b test -i 1222062543
 
